@@ -4,11 +4,80 @@ Base settings shared across all environments.
 from pathlib import Path
 from decouple import config
 
+JAZZMIN_SETTINGS = {
+    "site_title": "Dorjiverse Admin",
+    "site_header": "Dorjiverse",
+    "site_brand": "Dorjiverse",
+    "site_logo": None,
+    "welcome_sign": "Welcome, Dorji",
+    "copyright": "Dorji Wangchuk",
+    "search_model": ["blog.BlogPost", "portfolio.Project"],
+    "topmenu_links": [
+        {"name": "View Site", "url": "/", "new_window": True},
+    ],
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "hide_apps": [],
+    "hide_models": [],
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+        "blog.BlogPost": "fas fa-pen-nib",
+        "blog.Category": "fas fa-folder",
+        "blog.Tag": "fas fa-tag",
+        "portfolio.Project": "fas fa-laptop-code",
+        "portfolio.Skill": "fas fa-code",
+        "core.SiteProfile": "fas fa-id-card",
+    },
+    "default_icon_parents": "fas fa-chevron-circle-right",
+    "default_icon_children": "fas fa-circle",
+    "related_modal_active": False,
+    "use_google_fonts_cdn": True,
+    "show_ui_builder": False,
+    "changeform_format": "horizontal_tabs",
+    "language_chooser": False,
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": "navbar-dark",
+    "accent": "accent-primary",
+    "navbar": "navbar-dark",
+    "no_navbar_border": True,
+    "navbar_fixed": True,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": True,
+    "sidebar": "sidebar-dark-primary",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": True,
+    "sidebar_nav_compact_style": False,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "darkly",
+    "dark_mode_theme": "darkly",
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success",
+    },
+}
+
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 SECRET_KEY = config('SECRET_KEY', default='django-insecure-change-this-key-in-production')
 
 INSTALLED_APPS = [
+    # Jazzmin must be FIRST — before django.contrib.admin
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
