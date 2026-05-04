@@ -1,0 +1,19 @@
+[Unit]
+Description=Dorjivers Gunicorn Daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+User=dorjivers
+Group=www-data
+WorkingDirectory=/home/dorjivers/dorjiverse
+EnvironmentFile=/home/dorjivers/dorjiverse/.env
+Environment="DJANGO_SETTINGS_MODULE=config.settings.production"
+ExecStart=/home/dorjivers/dorjiverse/venv/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/gunicorn.sock \
+          config.wsgi:application
+
+[Install]
+WantedBy=multi-user.target

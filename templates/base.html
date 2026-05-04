@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Dorjivers — Dorji Wangchuk{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}Code, stories, and ideas from Dorji's world.{% endblock %}" />
+
+  <!-- Tailwind CSS via CDN (full JIT build) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['"Fira Code"', '"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              50:  '#eef2ff',
+              400: '#818cf8',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+            },
+          },
+          typography: {
+            DEFAULT: {
+              css: {
+                color: '#cbd5e1',
+                a: { color: '#818cf8' },
+                h1: { color: '#f8fafc' },
+                h2: { color: '#f8fafc' },
+                h3: { color: '#f1f5f9' },
+                strong: { color: '#f1f5f9' },
+                code: {
+                  color: '#a5b4fc',
+                  backgroundColor: '#1e293b',
+                  borderRadius: '4px',
+                  padding: '2px 6px',
+                },
+                blockquote: {
+                  color: '#94a3b8',
+                  borderLeftColor: '#6366f1',
+                },
+                'pre code': {
+                  backgroundColor: 'transparent',
+                  padding: '0',
+                },
+              },
+            },
+          },
+        },
+      },
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
+
+  {% block extra_head %}{% endblock %}
+</head>
+
+<body class="bg-slate-950 text-slate-100 font-sans antialiased min-h-screen flex flex-col">
+
+  {% include 'components/navbar.html' %}
+
+  <!-- Flash messages -->
+  {% if messages %}
+  <div class="fixed top-20 right-4 z-[100] space-y-2 max-w-sm">
+    {% for message in messages %}
+    <div class="px-5 py-3 rounded-xl shadow-2xl text-sm font-medium backdrop-blur-sm
+      {% if 'success' in message.tags %}bg-emerald-500/90 text-white
+      {% elif 'error' in message.tags %}bg-red-500/90 text-white
+      {% else %}bg-brand-500/90 text-white{% endif %}
+      translate-x-0 transition-all duration-300 msg-toast">
+      {{ message }}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <main class="flex-1">
+    {% block content %}{% endblock %}
+  </main>
+
+  {% include 'components/footer.html' %}
+
+  <!-- Global scripts -->
+  <script>
+    // Auto-dismiss toast messages after 4 seconds
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.msg-toast').forEach(el => {
+        setTimeout(() => {
+          el.style.opacity = '0';
+          el.style.transform = 'translateX(110%)';
+          setTimeout(() => el.remove(), 400);
+        }, 4000);
+      });
+
+      // Mobile nav toggle
+      const btn = document.getElementById('nav-toggle');
+      const menu = document.getElementById('mobile-nav');
+      if (btn && menu) {
+        btn.addEventListener('click', () => menu.classList.toggle('hidden'));
+      }
+    });
+  </script>
+
+  {% block extra_scripts %}{% endblock %}
+</body>
+</html>

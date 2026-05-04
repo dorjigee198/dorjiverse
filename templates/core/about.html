@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About — Dorji Wangchuk | Dorjivers{% endblock %}
+
+{% block content %}
+<div class="pt-24 pb-20">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Header -->
+    <div class="mb-16">
+      <p class="text-brand-400 font-mono text-sm mb-3">// about me</p>
+      <h1 class="text-4xl sm:text-5xl font-bold text-white mb-6">Hello, I'm Dorji</h1>
+    </div>
+
+    <!-- Bio + Photo -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 mb-20">
+      <!-- Photo placeholder -->
+      <div class="lg:col-span-1 flex justify-center lg:justify-start">
+        <div class="w-52 h-52 rounded-2xl bg-gradient-to-br from-brand-600/40 to-purple-600/40 border border-brand-500/30 flex items-center justify-center flex-shrink-0">
+          <span class="text-7xl">👨‍💻</span>
+        </div>
+      </div>
+
+      <!-- Bio text -->
+      <div class="lg:col-span-2 space-y-4 text-slate-400 leading-relaxed">
+        <p>
+          I'm <span class="text-white font-semibold">Dorji Wangchuk</span>, a software developer from
+          <span class="text-white">Bhutan</span> 🇧🇹 with a passion for building clean, efficient, and meaningful
+          web applications. I specialise in <span class="text-brand-400">Python</span> and
+          <span class="text-brand-400">Django</span> backend development.
+        </p>
+        <p>
+          <span class="text-white font-semibold">Dorjivers</span> is my personal brand — a space where I share
+          code, ideas, and stories from my journey as a developer. The name is a blend of my name and the word
+          "verse", representing my universe of technology and creativity.
+        </p>
+        <p>
+          When I'm not coding, I'm reading about technology, exploring open-source projects,
+          or writing about the lessons I pick up along the way.
+        </p>
+        <div class="flex flex-wrap gap-3 pt-4">
+          <a href="{% url 'core:resume_download' %}"
+             class="inline-flex items-center gap-2 px-5 py-2.5 bg-brand-600 hover:bg-brand-500 text-white rounded-xl text-sm font-semibold transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+            </svg>
+            Download Resume
+          </a>
+          <a href="{% url 'core:contact' %}"
+             class="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-sm font-semibold border border-slate-700 hover:border-slate-600 transition-colors">
+            Contact Me
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Education -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+        <span class="text-brand-400">🎓</span> Education
+      </h2>
+      <div class="space-y-4">
+        <div class="bg-slate-800/60 rounded-2xl p-6 border border-slate-700/60">
+          <div class="flex flex-wrap items-start justify-between gap-2">
+            <div>
+              <h3 class="text-white font-bold">Bachelor of Engineering in Information Technology</h3>
+              <p class="text-brand-400 text-sm font-medium mt-0.5">College of Science and Technology, RUB</p>
+            </div>
+            <span class="text-slate-500 text-sm font-mono whitespace-nowrap">2022 – 2026</span>
+          </div>
+          <p class="text-slate-400 text-sm mt-3 leading-relaxed">
+            Studying computer science fundamentals, software engineering, databases, networks,
+            and full-stack web development.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Experience -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+        <span class="text-brand-400">💼</span> Experience
+      </h2>
+      <div class="relative border-l-2 border-slate-800 pl-6 space-y-8">
+        <div class="relative">
+          <div class="absolute -left-[29px] top-1 w-4 h-4 rounded-full bg-brand-600 border-2 border-slate-950"></div>
+          <div class="bg-slate-800/60 rounded-2xl p-6 border border-slate-700/60">
+            <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
+              <h3 class="text-white font-bold">Backend Developer Intern</h3>
+              <span class="text-slate-500 text-sm font-mono">2024</span>
+            </div>
+            <p class="text-brand-400 text-sm font-medium mb-3">Django / Python project</p>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Built RESTful APIs and web application features using Django. Worked with PostgreSQL,
+              integrated third-party APIs, and participated in code reviews.
+            </p>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="absolute -left-[29px] top-1 w-4 h-4 rounded-full bg-purple-600 border-2 border-slate-950"></div>
+          <div class="bg-slate-800/60 rounded-2xl p-6 border border-slate-700/60">
+            <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
+              <h3 class="text-white font-bold">Academic Projects</h3>
+              <span class="text-slate-500 text-sm font-mono">Ongoing</span>
+            </div>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Developed multiple full-stack web applications as part of university coursework,
+              focusing on Django, database design, and clean architecture.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Skills by category -->
+    {% if skills_by_category %}
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+        <span class="text-brand-400">⚡</span> Skills &amp; Technologies
+      </h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {% for category, skill_list in skills_by_category.items %}
+        <div class="bg-slate-800/60 rounded-2xl p-6 border border-slate-700/60">
+          <h3 class="text-brand-400 font-mono text-sm font-semibold uppercase tracking-wider mb-4">
+            {{ category }}
+          </h3>
+          <div class="space-y-3">
+            {% for skill in skill_list %}
+            <div>
+              <div class="flex justify-between text-sm mb-1">
+                <span class="text-slate-300 font-medium">{{ skill.name }}</span>
+                <span class="text-slate-500 text-xs font-mono">{{ skill.get_level_display }}</span>
+              </div>
+              <div class="h-1.5 bg-slate-700 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-brand-500 to-purple-500 rounded-full transition-all duration-700"
+                     style="width: {{ skill.level_percentage }}%"></div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Interests -->
+    <div>
+      <h2 class="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+        <span class="text-brand-400">🌟</span> Interests
+      </h2>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        {% for item in interests %}
+        <div class="bg-slate-800/60 rounded-xl p-4 border border-slate-700/60 text-center hover:border-brand-500/40 transition-colors">
+          <p class="text-slate-300 text-sm font-medium">{{ item }}</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
